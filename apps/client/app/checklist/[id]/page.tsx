@@ -1,3 +1,4 @@
+// apps/client/app/checklist/[id]/page.tsx
 import ChecklistClient from "./ChecklistClient";
 
 export default async function Page({
@@ -5,6 +6,6 @@ export default async function Page({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const { id } = await params; // 👈 Next 16: params is a Promise
+  const { id } = await params; // Next 16: params is a Promise
   return <ChecklistClient checklistId={id} />;
 }
