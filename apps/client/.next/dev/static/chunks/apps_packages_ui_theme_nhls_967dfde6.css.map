@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["file:///Users/kabelomodipa/Documents/help/GitHub/nhls-CheckLab/apps/packages/ui/theme/nhls.css"],"sourcesContent":[":root { --nhls-primary:#005B8E; --nhls-accent:#00A88E; --nhls-ink:#1B1F23; --nhls-bg:#F5F8FA; --nhls-line:#D6DFE6; }\nbody { background: var(--nhls-bg); color: var(--nhls-ink); }\n@media print { body { background:#fff; color:#000 } .no-print{display:none!important} }\n"],"names":[],"mappings":"AAAA;;;;;;;;AACA;;;;;AACA;EAAe;;;;;EAAqC","debugId":null}}]
+}

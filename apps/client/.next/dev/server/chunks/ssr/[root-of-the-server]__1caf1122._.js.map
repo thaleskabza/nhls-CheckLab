@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 14, "column": 0}, "map": {"version":3,"sources":["file:///Users/kabelomodipa/Documents/help/GitHub/nhls-check-lab/apps/client/app/page.tsx"],"sourcesContent":["export default function Home() { return <a className=\"text-blue-700 underline\" href=\"/checklist/start\">Start</a>; }\n"],"names":[],"mappings":";;;;;;AAAe,SAAS;IAAS,qBAAO,8OAAC;QAAE,WAAU;QAA0B,MAAK;kBAAmB;;;;;;AAAW","debugId":null}}]
+}
