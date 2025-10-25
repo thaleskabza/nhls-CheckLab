@@ -14,8 +14,7 @@
   "dependencies": {
     "next": "16.0.0",
     "react": "19.2.0",
-    "react-dom": "19.2.0",
-    "zod": "^4.1.12"
+    "react-dom": "19.2.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -30,6 +29,12 @@
     "eslint-config-next": "15.5.5",
     "pg": "^8.16.3",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "zod": "^4.1.12",
+    "dotenv": "^17.2.3",
+    "drizzle-zod": "^0.8.3",
+    "@types/dotenv": "^8.2.0",
+    "swr": "^2.3.6"
+
   }
 }

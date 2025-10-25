@@ -1,5 +1,5 @@
 {
-  "/api/checklists/route": "app/api/checklists/route.js",
-  "/checklist/start/page": "app/checklist/start/page.js",
-  "/page": "app/page.js"
+  "/api/checklists/[id]/answers/route": "app/api/checklists/[id]/answers/route.js",
+  "/api/checklists/[id]/route": "app/api/checklists/[id]/route.js",
+  "/checklist/[id]/page": "app/checklist/[id]/page.js"
 }

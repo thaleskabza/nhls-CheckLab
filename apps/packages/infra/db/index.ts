@@ -1,3 +1,4 @@
+import "dotenv/config"; // Load .env variables
 import { drizzle } from "drizzle-orm/node-postgres";
 import pg from "pg";
 import { env } from "@config/env"; // if you have one

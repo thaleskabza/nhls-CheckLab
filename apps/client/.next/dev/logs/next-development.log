@@ -1,104 +1,41 @@
-[00:00:00.525] Server  LOG      ✓ Ready in 331ms
-[00:00:24.665] Server  WARN     ⚠ Cross origin request detected from 192.168.0.200 to /_next/* resource. In a future major version of Next.js, you will need to explicitly configure "allowedDevOrigins" in next.config to allow this.
+[00:00:00.662] Server  LOG      ✓ Ready in 419ms
+[00:00:01.008] Server  WARN     ⚠ Cross origin request detected from 192.168.0.200 to /_next/* resource. In a future major version of Next.js, you will need to explicitly configure "allowedDevOrigins" in next.config to allow this.
 Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
-[00:00:24.707] Browser ERROR   ./apps/client/app/layout.tsx:3:1
-Module not found: Can't resolve '../apps/packages/ui/theme/nhls.css'
-  1 | //apps/client/app/layout.tsx
-  2 | import "..app/globals.css";
-> 3 | import "../apps/packages/ui/theme/nhls.css";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  4 | export default function Layout({ children }:{children:React.ReactNode}){
-  5 |   return <html lang="en"><body><header className="p-4 border-b bg-white"><h1 className="text-xl font-semibold">NHLS Waste Generator Inspection</h1></header><main className="p-4">{children}</main></body></html>;
-  6 | }
+[00:00:03.440] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:03.999] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
 
-https://nextjs.org/docs/messages/module-not-found
-[00:00:24.707] Browser ERROR   ./apps/client/app/layout.tsx:2:1
-Module not found: Can't resolve '..app/globals.css'
-  1 | //apps/client/app/layout.tsx
-> 2 | import "..app/globals.css";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  3 | import "../apps/packages/ui/theme/nhls.css";
-  4 | export default function Layout({ children }:{children:React.ReactNode}){
-  5 |   return <html lang="en"><body><header className="p-4 border-b bg-white"><h1 className="text-xl font-semibold">NHLS Waste Generator Inspection</h1></header><main className="p-4">{children}</main></body></html>;
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
 
-https://nextjs.org/docs/messages/module-not-found
-[00:00:39.655] Server  ERROR    ⨯ ./apps/packages/api/openapi/schema.ts:1:1
-Module not found: Can't resolve 'zod'
-> 1 | import { z } from "zod";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | export const AnswerItem = z.object({
-  3 |   sectionCode: z.enum(["A","B","C"]),
-  4 |   questionCode: z.string(),
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
 
+%s%s https://react.dev/link/hydration-mismatch 
 
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/checklist..." notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="/apps/clie...">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <Layout>
+                        <html
+                          lang="en"
+-                         katalonextensionid="ljdobmomdgdljniojadhoplhkpialdid"
+                        >
+                          <body
+-                           data-testim-main-word-scripts-loaded="true"
+                          >
+                  ...
 
-Import trace:
-  App Route:
-    ./apps/packages/api/openapi/schema.ts
-    ./apps/packages/api/http/handlers/checklists.post.ts
-    ./apps/client/app/api/checklists/route.ts
-
-https://nextjs.org/docs/messages/module-not-found
-
-
-[00:00:39.850] Browser ERROR   ./apps/packages/api/openapi/schema.ts:1:1
-Module not found: Can't resolve 'zod'
-> 1 | import { z } from "zod";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | export const AnswerItem = z.object({
-  3 |   sectionCode: z.enum(["A","B","C"]),
-  4 |   questionCode: z.string(),
-
-Import trace:
-  App Route:
-    ./apps/packages/api/openapi/schema.ts
-    ./apps/packages/api/http/handlers/checklists.post.ts
-    ./apps/client/app/api/checklists/route.ts
-
-https://nextjs.org/docs/messages/module-not-found
-[00:00:40.096] Browser ERROR   ./apps/packages/api/openapi/schema.ts:1:1
-Module not found: Can't resolve 'zod'
-> 1 | import { z } from "zod";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | export const AnswerItem = z.object({
-  3 |   sectionCode: z.enum(["A","B","C"]),
-  4 |   questionCode: z.string(),
-
-Import trace:
-  App Route:
-    ./apps/packages/api/openapi/schema.ts
-    ./apps/packages/api/http/handlers/checklists.post.ts
-    ./apps/client/app/api/checklists/route.ts
-
-https://nextjs.org/docs/messages/module-not-found
-[00:00:40.096] Browser ERROR   ./apps/packages/api/openapi/schema.ts:1:1
-Module not found: Can't resolve 'zod'
-> 1 | import { z } from "zod";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | export const AnswerItem = z.object({
-  3 |   sectionCode: z.enum(["A","B","C"]),
-  4 |   questionCode: z.string(),
-
-Import trace:
-  App Route:
-    ./apps/packages/api/openapi/schema.ts
-    ./apps/packages/api/http/handlers/checklists.post.ts
-    ./apps/client/app/api/checklists/route.ts
-
-https://nextjs.org/docs/messages/module-not-found
-[00:00:40.276] Browser ERROR   ./apps/packages/api/openapi/schema.ts:1:1
-Module not found: Can't resolve 'zod'
-> 1 | import { z } from "zod";
-    | ^^^^^^^^^^^^^^^^^^^^^^^^
-  2 | export const AnswerItem = z.object({
-  3 |   sectionCode: z.enum(["A","B","C"]),
-  4 |   questionCode: z.string(),
-
-Import trace:
-  App Route:
-    ./apps/packages/api/openapi/schema.ts
-    ./apps/packages/api/http/handlers/checklists.post.ts
-    ./apps/client/app/api/checklists/route.ts
-
-https://nextjs.org/docs/messages/module-not-found
-[00:00:40.276] Browser ERROR   unhandledRejection: SyntaxError: The string did not match the expected pattern.
