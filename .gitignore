@@ -1,0 +1,75 @@
+# ====================================================
+#  Root / Monorepo Ignore Rules
+# ====================================================
+
+# dependencies
+node_modules/
+apps/**/node_modules/
+apps/packages/**/node_modules/
+
+# build outputs
+build/
+dist/
+
+# Next.js build output
+.next/
+apps/**/.next/
+
+# Drizzle migration cache
+drizzle/*.sql
+drizzle/meta/
+
+# production artifacts
+out/
+.vercel/
+*.pem
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# testing & coverage
+coverage/
+apps/**/coverage/
+
+# environment files
+.env
+.env.local
+.env.*.local
+
+# macOS & misc
+.DS_Store
+Thumbs.db
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ====================================================
+# App-specific paths
+# ====================================================
+
+# Admin app build & deps
+apps/admin/.next/
+apps/admin/node_modules/
+
+# Client app build & deps
+apps/client/.next/
+apps/client/node_modules/
+
+# Packages build & deps
+apps/packages/**/.next/
+apps/packages/**/node_modules/
+
+# ====================================================
+#  Safe files to KEEP in git
+# (ensure these remain tracked)
+# ====================================================
+
+!.env.template
+!drizzle/0000_tired_tenebrous.sql
+!drizzle.config.ts
+!apps/**/tailwind.config.ts
+!apps/**/tsconfig.json
+!apps/**/next.config.mjs
+!apps/packages/ui/theme/nhls.css
+!apps/packages/ui/components/QuestionEditor.tsx

@@ -1,8 +1,8 @@
 // apps/client/app/layout.tsx
-import "./globals.css";                      // was `"..app/globals.css"` (typo)
-import "../../packages/ui/theme/nhls.css";   // was `"../apps/packages/ui/theme/nhls.css"` (wrong path)
+import "./globals.css";
+import "@ui/theme/nhls.css";
 
-export default function Layout({ children }:{children:React.ReactNode}){
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
