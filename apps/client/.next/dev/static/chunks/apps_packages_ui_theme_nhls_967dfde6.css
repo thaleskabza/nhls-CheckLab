@@ -1,0 +1,26 @@
+/* [project]/apps/packages/ui/theme/nhls.css [app-client] (css) */
+:root {
+  --nhls-primary: #005b8e;
+  --nhls-accent: #00a88e;
+  --nhls-ink: #1b1f23;
+  --nhls-bg: #f5f8fa;
+  --nhls-line: #d6dfe6;
+}
+
+body {
+  background: var(--nhls-bg);
+  color: var(--nhls-ink);
+}
+
+@media print {
+  body {
+    color: #000;
+    background: #fff;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}
+
+/*# sourceMappingURL=apps_packages_ui_theme_nhls_967dfde6.css.map*/
