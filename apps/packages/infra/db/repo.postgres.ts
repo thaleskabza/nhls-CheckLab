@@ -1,6 +1,6 @@
 // apps/packages/infra/db/repo.postgres.ts
 import { db } from "./index";
-import { checklists, checklistAnswers, checklistDefinitions } from "./schema";
+import { checklists, checklistAnswers, checklistDefinitions, auditLogs } from "./schema";
 import type { ChecklistRepo } from "@core/ports/ChecklistRepo";
 import type { Checklist, ChecklistDef } from "@core/domain/checklist";
 import { eq, sql } from "drizzle-orm";
@@ -31,30 +31,44 @@ const DEFAULT_DEF: ChecklistDef = {
 };
 
 // Drizzle `date()` columns expect a string (YYYY-MM-DD) or null
-const toDateStr = (d?: string) => (d ? d.slice(0, 10) : null);
+const toDateStr = (d?: string): string | null => (d ? d.slice(0, 10) : null);
 
-// lightweight audit helper as a free function (so calls below work)
+// Lightweight audit helper
 async function audit(
   action: string,
   entityType: string,
   entityId: string,
   actorId: string,
   after: any,
-  before?: any
-) {
-  const { auditLogs } = await import("./schema");
+  before: any = null
+): Promise<void> {
   await db.insert(auditLogs).values({
     actorId,
     action,
     entityType,
     entityId,
-    before: before ?? null,
-    after: after ?? null
+    before,
+    after
   });
+}
+
+// Validation helpers
+function validateUserId(userId: string | undefined | null, context: string): asserts userId is string {
+  if (!userId) {
+    throw new Error(`${context}: userId is required but was ${userId}`);
+  }
+}
+
+function validateLabId(labId: string | undefined | null, context: string): asserts labId is string {
+  if (!labId) {
+    throw new Error(`${context}: labId is required but was ${labId}`);
+  }
 }
 
 export const PostgresChecklistRepo = (): ChecklistRepo => ({
   async getActiveChecklistIdForUser(userId) {
+    validateUserId(userId, "getActiveChecklistIdForUser");
+
     const rows = await db
       .select({ id: checklists.id, status: checklists.status })
       .from(checklists)
@@ -65,6 +79,11 @@ export const PostgresChecklistRepo = (): ChecklistRepo => ({
   },
 
   async createChecklist(labId, userId) {
+    // Validate inputs
+    validateLabId(labId, "createChecklist");
+    validateUserId(userId, "createChecklist");
+
+    // Insert checklist
     const [row] = await db
       .insert(checklists)
       .values({
@@ -76,18 +95,33 @@ export const PostgresChecklistRepo = (): ChecklistRepo => ({
       })
       .returning({ id: checklists.id });
 
+    if (!row?.id) {
+      throw new Error("Failed to create checklist: no ID returned");
+    }
+
+    // Insert definition
     await db.insert(checklistDefinitions).values({
       checklistId: row.id,
       spec: DEFAULT_DEF,
       source: "NHLS GPS0061/GPS0055"
     });
 
-    await audit("CREATE", "Checklist", row.id, userId, { labId, title: DEFAULT_DEF.title });
+    // Audit log
+    await audit("CREATE", "Checklist", row.id, userId, { 
+      labId, 
+      title: DEFAULT_DEF.title,
+      status: "DRAFT",
+      version: 1
+    });
 
     return row.id;
   },
 
   async getChecklist(id) {
+    if (!id) {
+      throw new Error("getChecklist: id is required");
+    }
+
     const [c] = await db.query.checklists.findMany({
       where: (t, { eq }) => eq(t.id, id),
       limit: 1
@@ -109,17 +143,32 @@ export const PostgresChecklistRepo = (): ChecklistRepo => ({
       title: c.title,
       startedAt: c.startedAt?.toISOString() ?? new Date().toISOString(),
       finalizedAt: c.finalizedAt?.toISOString(),
-      definition: (def?.spec as any) ?? DEFAULT_DEF
+      definition: (def?.spec as ChecklistDef) ?? DEFAULT_DEF
     };
+    
     return entity;
   },
 
   async saveAnswers(id, expectedVersion, items) {
-    const cur = await this.getChecklist(id);
-    if (!cur) throw new Error("NotFound");
-    if (cur.status !== "DRAFT") throw new Error("NotEditable");
-    if (cur.version !== expectedVersion) throw new Error("VersionConflict");
+    if (!id) {
+      throw new Error("saveAnswers: id is required");
+    }
 
+    const cur = await this.getChecklist(id);
+    
+    if (!cur) {
+      throw new Error("NotFound");
+    }
+    
+    if (cur.status !== "DRAFT") {
+      throw new Error("NotEditable");
+    }
+    
+    if (cur.version !== expectedVersion) {
+      throw new Error("VersionConflict");
+    }
+
+    // Batch process answers
     for (const it of items) {
       await db
         .insert(checklistAnswers)
@@ -129,7 +178,7 @@ export const PostgresChecklistRepo = (): ChecklistRepo => ({
           questionCode: it.questionCode,
           answer: it.answer,
           comment: it.comment ?? null,
-          dueDate: toDateStr(it.dueDate) // string or null for Drizzle `date()`
+          dueDate: toDateStr(it.dueDate)
         })
         .onConflictDoUpdate({
           target: [checklistAnswers.checklistId, checklistAnswers.questionCode],
@@ -157,11 +206,23 @@ export const PostgresChecklistRepo = (): ChecklistRepo => ({
   },
 
   async setStatus(id, status) {
-    await db.update(checklists).set({ status }).where(eq(checklists.id, id));
+    if (!id) {
+      throw new Error("setStatus: id is required");
+    }
+    
+    await db
+      .update(checklists)
+      .set({ status })
+      .where(eq(checklists.id, id));
+    
     await audit("STATUS", "Checklist", id, "system", { status });
   },
 
   async bumpVersion(id) {
+    if (!id) {
+      throw new Error("bumpVersion: id is required");
+    }
+
     const [row] = await db
       .update(checklists)
       .set({ version: sql`${checklists.version} + 1` })

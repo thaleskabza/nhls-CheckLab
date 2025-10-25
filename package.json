@@ -1,60 +1,47 @@
-"use client";
+{
+  "name": "nhls-check-lab",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "db:generate": "drizzle-kit generate",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+  },
+  "dependencies": {
+    "next": "^16.0.0",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20.19.21",
+    "@types/pg": "^8.15.5",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "drizzle-kit": "^0.31.5",
+    "drizzle-orm": "^0.44.7",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.5",
+    "pg": "^8.16.3",
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "zod": "^4.1.12",
+    "dotenv": "^17.2.3",
+    "drizzle-zod": "^0.8.3",
+    "@types/dotenv": "^8.2.0",
+    "swr": "^2.3.6",
+    "next-auth": "^4.24.11",
+    "@auth/core":"^0.41.0",
+    "busboy": "^1.6.0",
+    "pdfkit": "^0.17.2",
+    "swagger-ui-react": "^5.29.5",
+    "swagger-ui-express": "^5.0.1"
 
-import useSWR from "swr";
-import { useState } from "react";
-import { QuestionEditor } from "@ui/components/QuestionEditor";
-
-const fetcher = (u: string) => fetch(u).then(r => r.json());
-
-export default function ChecklistClient({ checklistId }: { checklistId: string }) {
-  const { data, mutate } = useSWR(`/api/checklists/${checklistId}`, fetcher);
-  const [answers, setAnswers] = useState<Record<string, "Y"|"N"|"NA">>({});
-  const [saving, setSaving] = useState(false);
-
-  if (!data) return <div>Loading...</div>;
-  const { definition, version, status } = data;
-
-  async function saveSection(sectionCode: "A"|"B"|"C") {
-    setSaving(true);
-    const items = Object.entries(answers)
-      .filter(([k]) => k.startsWith(sectionCode))
-      .map(([q, a]) => ({ sectionCode, questionCode: q, answer: a }));
-    const res = await fetch(`/api/checklists/${checklistId}/answers`, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ checklistId: checklistId, expectedVersion: version, items })
-    });
-    if (res.status === 409) { alert("Version conflict. Refreshing..."); location.reload(); return; }
-    await mutate();
-    setSaving(false);
-    alert("Saved.");
   }
-
-  return (
-    <div className="max-w-3xl">
-      <h2 className="text-lg font-semibold">{definition.title}</h2>
-      <div className="text-sm mb-4">Status: {status} · Version: {version}</div>
-      {definition.sections.map((s: any) => (
-        <section key={s.code} className="mb-8">
-          <h3 className="font-semibold mb-2">{s.code}. {s.title}</h3>
-          {s.items.map((q: any) => (
-            <QuestionEditor
-              key={q.code}
-              q={q}
-              value={answers[q.code]}
-              onChange={(v) => setAnswers(prev => ({ ...prev, [q.code]: v }))}
-            />
-          ))}
-          <button
-            onClick={() => saveSection(s.code)}
-            disabled={saving}
-            className="px-4 py-2 rounded text-white"
-            style={{ background: "var(--nhls-accent)" }}
-          >
-            Save {s.code}
-          </button>
-        </section>
-      ))}
-    </div>
-  );
 }
+
