@@ -5,9 +5,12 @@
     "moduleResolution": "Bundler",
     "skipLibCheck": true,
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./app/*"],
+      "@infra/*": ["../packages/infra/*"],
+      "@core/*": ["../packages/core/*"],
+      "@api/*": ["../packages/api/*"],
+      "@config/*": ["../packages/config/*"],
+      "@ui/*": ["../packages/ui/*"]
     }
   },
   "include": [
