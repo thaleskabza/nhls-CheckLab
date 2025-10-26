@@ -1,4 +1,4 @@
-//apps/packages/api/http/handlers/checklists.pdf.ts
+// apps/packages/api/http/handlers/checklists.pdf.ts
 import PDFDocument from "pdfkit";
 import { PostgresChecklistRepo } from "@infra/db/repo.postgres";
 
@@ -11,7 +11,7 @@ export async function GET(_req: Request, ctx: { params: Promise<{ id: string }> 
   const doc = new PDFDocument();
   const chunks: Buffer[] = [];
   doc.on("data", (d) => chunks.push(d));
-  const ready = new Promise<Buffer>((r)=>doc.on("end", ()=>r(Buffer.concat(chunks))));
+  const ready = new Promise<Buffer>((r) => doc.on("end", () => r(Buffer.concat(chunks))));
 
   doc.fontSize(14).text("NHLS – Waste Generator Site Inspection", { underline: true });
   doc.moveDown().fontSize(10).text(`Checklist: ${c.id}`);
@@ -32,7 +32,11 @@ export async function GET(_req: Request, ctx: { params: Promise<{ id: string }> 
   doc.end();
   const pdf = await ready;
 
-  return new Response(pdf, {
-    headers: { "content-type": "application/pdf", "content-disposition": `inline; filename="checklist-${c.id}.pdf"` }
+  // Convert Buffer to Uint8Array for Web API Response
+  return new Response(new Uint8Array(pdf), {
+    headers: {
+      "content-type": "application/pdf",
+      "content-disposition": `inline; filename="checklist-${c.id}.pdf"`
+    }
   });
 }
