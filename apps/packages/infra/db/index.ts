@@ -1,3 +1,4 @@
+// apps/packages/infra/db/index.ts
 import "dotenv/config"; // Load .env variables
 import { drizzle } from "drizzle-orm/node-postgres";
 import pg from "pg";

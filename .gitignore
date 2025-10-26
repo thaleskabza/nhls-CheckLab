@@ -13,8 +13,12 @@ dist/
 
 # Next.js build output
 .next/
-apps/**/.next/
+apps/**/.next/*
+apps/client/.next/
+apps/admin/.next/
+apps/packages/**/.next/*
 
+apps/**/.next/*
 # Drizzle migration cache
 drizzle/*.sql
 drizzle/meta/

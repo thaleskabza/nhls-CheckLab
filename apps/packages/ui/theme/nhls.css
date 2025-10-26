@@ -1,3 +1,84 @@
-:root { --nhls-primary:#005B8E; --nhls-accent:#00A88E; --nhls-ink:#1B1F23; --nhls-bg:#F5F8FA; --nhls-line:#D6DFE6; }
-body { background: var(--nhls-bg); color: var(--nhls-ink); }
-@media print { body { background:#fff; color:#000 } .no-print{display:none!important} }
+/* apps/packages/ui/theme/nhls.css */
+:root {
+    --nhls-primary: #16a34a;
+    --nhls-primary-dark: #15803d;
+    --nhls-secondary: #059669;
+    --nhls-accent: #10b981;
+    --nhls-gray: #6b7280;
+  }
+
+
+
+
+:root {
+  --nhls-primary: #16a34a;
+  --nhls-primary-dark: #15803d;
+  --nhls-secondary: #059669;
+  --nhls-accent: #10b981;
+  --nhls-gray: #6b7280;
+}
+
+@layer base {
+  body {
+    @apply bg-gray-50 text-gray-900;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold;
+  }
+}
+
+@layer components {
+  .nhls-container {
+    @apply container mx-auto px-4 py-6;
+  }
+  
+  .nhls-card {
+    @apply bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden;
+  }
+  
+  .nhls-button-primary {
+    @apply px-6 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition-colors shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  
+  .nhls-button-secondary {
+    @apply px-6 py-3 bg-white text-green-600 border-2 border-green-600 rounded-lg font-semibold hover:bg-green-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  
+  .nhls-input {
+    @apply w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-colors;
+  }
+  
+  .nhls-badge-draft {
+    @apply px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-semibold;
+  }
+  
+  .nhls-badge-review {
+    @apply px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-semibold;
+  }
+  
+  .nhls-badge-final {
+    @apply px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-semibold;
+  }
+  
+  .nhls-section-header {
+    @apply bg-gradient-to-r from-green-600 to-green-700 text-white p-6 rounded-t-lg;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@media print {
+    body {
+        background: #fff;
+        color: #000
+    }
+
+    .no-print {
+        display: none !important
+    }
+}

@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///Users/kabelomodipa/Documents/help/GitHub/nhls-check-lab/apps/client/app/layout.tsx"],"sourcesContent":["// apps/client/app/layout.tsx\nimport \"./globals.css\";\nimport \"@ui/theme/nhls.css\";\n\nexport default function Layout({ children }: { children: React.ReactNode }) {\n  return (\n    <html lang=\"en\">\n      <body>\n        <header className=\"p-4 border-b bg-white\">\n          <h1 className=\"text-xl font-semibold\">NHLS Waste Generator Inspection</h1>\n        </header>\n        <main className=\"p-4\">{children}</main>\n      </body>\n    </html>\n  );\n}\n"],"names":[],"mappings":"AAAA,6BAA6B;;;;;;;;;AAId,SAAS,OAAO,EAAE,QAAQ,EAAiC;IACxE,qBACE,8OAAC;QAAK,MAAK;kBACT,cAAA,8OAAC;;8BACC,8OAAC;oBAAO,WAAU;8BAChB,cAAA,8OAAC;wBAAG,WAAU;kCAAwB;;;;;;;;;;;8BAExC,8OAAC;oBAAK,WAAU;8BAAO;;;;;;;;;;;;;;;;;AAI/B","debugId":null}},
-    {"offset": {"line": 57, "column": 0}, "map": {"version":3,"sources":["file:///Users/kabelomodipa/Documents/help/GitHub/nhls-check-lab/node_modules/next/src/server/route-modules/app-page/vendored/rsc/react-jsx-dev-runtime.ts"],"sourcesContent":["module.exports = (\n  require('../../module.compiled') as typeof import('../../module.compiled')\n).vendored['react-rsc']!.ReactJsxDevRuntime\n"],"names":["module","exports","require","vendored","ReactJsxDevRuntime"],"mappings":"AAAAA,OAAOC,OAAO,GACZC,QAAQ,4HACRC,QAAQ,CAAC,YAAY,CAAEC,kBAAkB","ignoreList":[0],"debugId":null}}]
-}
