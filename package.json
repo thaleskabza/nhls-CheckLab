@@ -2,7 +2,7 @@
   "name": "nhls-check-lab-monorepo",
   "private": true,
   "workspaces": ["apps/*", "packages/*"],
-  "engines": { "node": "24.1.0" },
+  "engines": { "node": "20.x" },
   "packageManager": "npm@11.6.2",
   "scripts": {
     "// info": "Root orchestrates tasks across workspaces. No runtime deps here.",
