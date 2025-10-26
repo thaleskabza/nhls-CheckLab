@@ -26,7 +26,8 @@
       "tailwindcss": "^4",
       "@tailwindcss/postcss": "^4",
       "eslint-config-next": "15.5.5",
-      "typescript": "^5"
+      "typescript": "^5",
+      "@types/busboy":"1.5.4"
     }
   }
   
