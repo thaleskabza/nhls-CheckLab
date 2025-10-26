@@ -90,6 +90,27 @@ export const labsRelations = relations(labs, ({ many }) => ({
   checklists: many(checklists)
 }));
 
+// Add this table definition with your other tables
+export const blobs = pgTable("blobs", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  checklistId: uuid("checklist_id").notNull().references(() => checklists.id, { onDelete: "cascade" }),
+  filename: text("filename").notNull(),
+  mime: text("mime").notNull(),
+  bytes: text("bytes").notNull(), // or use a bytea type if available
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow()
+});
+
+// Add this relation with your other relations
+export const blobsRelations = relations(blobs, ({ one }) => ({
+  checklist: one(checklists, {
+    fields: [blobs.checklistId],
+    references: [checklists.id]
+  })
+}));
+
+// Add these type exports with your other type exports
+export type Blob = typeof blobs.$inferSelect;
+export type NewBlob = typeof blobs.$inferInsert;
 export const usersRelations = relations(users, ({ many }) => ({
   checklists: many(checklists)
 }));
