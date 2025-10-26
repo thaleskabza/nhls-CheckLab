@@ -19,6 +19,7 @@
     "eslint": "^9",
     "typescript": "^5",
     "busboy": "^1.6.0",
-    "@types/busboy":"^1.5.4"
+    "@types/busboy":"^1.5.4",
+    "pdfkit": "^0.17.2"
   }
 }
