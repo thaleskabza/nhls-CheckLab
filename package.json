@@ -9,7 +9,13 @@
     "db:generate": "drizzle-kit generate",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "Clean": "rm -rf ./apps/admin/.next && rm -rf ./apps/web/.next",
+    "Remove:Modules_Package_loc": "rm -rf ./node_modules ./apps/admin/node_modules ./apps/web/node_modules ./apps/packages/api/node_modules ./apps/packages/infra/node_modules",
+    "postinstall": "npm run Remove:Modules_Package_loc",
+    "preinstall": "npm run Clean",
+    "Clean:Install": "rm -rf node_modules package-lock.json && npm install --legacy-peer-deps"
+    
   },
   "dependencies": {
     "next": "^16.0.0",
@@ -36,11 +42,15 @@
     "@types/dotenv": "^8.2.0",
     "swr": "^2.3.6",
     "next-auth": "^4.24.11",
-    "@auth/core":"^0.41.0",
     "busboy": "^1.6.0",
     "pdfkit": "^0.17.2",
     "swagger-ui-react": "^5.29.5",
-    "swagger-ui-express": "^5.0.1"
+    "swagger-ui-express": "^5.0.1",
+    "call-bind": "^1.0.8",
+    "deepmerge": "^4.3.1",
+    "hasown": "^2.0.2",
+    "get-intrinsic": "^1.3.0",
+    "function-bind": "^1.1.2"
 
   }
 }

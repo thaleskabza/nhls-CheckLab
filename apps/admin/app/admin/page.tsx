@@ -1,4 +1,4 @@
-//apps/admin/app/admin/page.tsx
+// apps/admin/app/admin/page.tsx
 export default function AdminHome(){
   return (
     <div>

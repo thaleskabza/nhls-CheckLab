@@ -1,3 +1,4 @@
+// apps/packages/infra/db/schema.ts
 import { pgEnum, pgTable, uuid, text, timestamp, integer, jsonb, primaryKey, date } from "drizzle-orm/pg-core";
 
 export const checklistStatus = pgEnum("checklist_status", ["DRAFT","REVIEW","LOCKED","FINAL"]);
@@ -41,3 +42,24 @@ export const checklistAnswers = pgTable("checklist_answers", {
 }, (t) => ({
   pk: primaryKey({ columns: [t.checklistId, t.questionCode] })
 }));
+
+// Add questionBank table for lab reports
+export const questionBank = pgTable("question_bank", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  code: text("code").notNull().unique(),
+  prompt: text("prompt").notNull(),
+  sectionCode: text("section_code").notNull(),
+  riskWeight: integer("risk_weight").default(1)
+});
+
+// Add auditLogs table
+export const auditLogs = pgTable("audit_logs", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  actorId: text("actor_id").notNull(),
+  action: text("action").notNull(),
+  entityType: text("entity_type").notNull(),
+  entityId: text("entity_id").notNull(),
+  before: jsonb("before"),
+  after: jsonb("after"),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow()
+});

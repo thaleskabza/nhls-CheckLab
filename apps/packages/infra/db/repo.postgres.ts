@@ -1,6 +1,6 @@
 // apps/packages/infra/db/repo.postgres.ts
 import { db } from "./index";
-import { checklists, checklistAnswers, checklistDefinitions, auditLogs } from "./schema";
+import { checklists, checklistAnswers, checklistDefinitions } from "./schema";
 import type { ChecklistRepo } from "@core/ports/ChecklistRepo";
 import type { Checklist, ChecklistDef } from "@core/domain/checklist";
 import { eq, sql } from "drizzle-orm";
@@ -33,7 +33,7 @@ const DEFAULT_DEF: ChecklistDef = {
 // Drizzle `date()` columns expect a string (YYYY-MM-DD) or null
 const toDateStr = (d?: string): string | null => (d ? d.slice(0, 10) : null);
 
-// Lightweight audit helper
+// Lightweight audit helper with dynamic import
 async function audit(
   action: string,
   entityType: string,
@@ -42,6 +42,7 @@ async function audit(
   after: any,
   before: any = null
 ): Promise<void> {
+  const { auditLogs } = await import("./schema");
   await db.insert(auditLogs).values({
     actorId,
     action,

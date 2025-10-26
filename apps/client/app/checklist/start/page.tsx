@@ -8,7 +8,7 @@ const seedDef = { title:"Waste Generator Site Inspection", policies:["GPS0061","
   ]};
 export default function StartChecklist(){
   const [creating,setCreating]=useState(false);
-  const [labId,setLabId]=useState("11111111-1111-1111-1111-111111111111");
+  const [labId,setLabId]=useState("264e3577-7708-4a0c-bbd9-c909d9f4edfb");
   async function onStart(){
     setCreating(true);
     const res = await fetch("/api/checklists", { method:"POST", headers:{ "content-type":"application/json" }, body: JSON.stringify({ labId }) });

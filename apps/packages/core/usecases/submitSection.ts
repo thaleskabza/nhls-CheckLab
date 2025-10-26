@@ -1,3 +1,4 @@
+// apps/packages/core/usecases/submitSection.ts
 import { ChecklistRepo } from "../ports/ChecklistRepo";
 import type { AnswerItem } from "../domain/checklist";
 export async function submitSectionUseCase(repo: ChecklistRepo, params: { checklistId: string; expectedVersion: number; items: AnswerItem[] }) {
