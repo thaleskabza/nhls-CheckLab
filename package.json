@@ -10,11 +10,7 @@
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "Clean": "rm -rf ./apps/admin/.next && rm -rf ./apps/web/.next",
-    "Remove:Modules_Package_loc": "rm -rf ./node_modules ./apps/admin/node_modules ./apps/web/node_modules ./apps/packages/api/node_modules ./apps/packages/infra/node_modules",
-    "postinstall": "npm run Remove:Modules_Package_loc",
-    "preinstall": "npm run Clean",
-    "Clean:Install": "rm -rf node_modules package-lock.json && npm install --legacy-peer-deps"
+    "Clean:Install": "rm -rf node_modules package-lock.json && npm cache clean --force && npm install --legacy-peer-deps && ls -la node_modules 2>/dev/null || echo 'No node_modules  found' &&  ls -la package-lock.json 2>/dev/null || echo 'No package-lock.json found'"
     
   },
   "dependencies": {
