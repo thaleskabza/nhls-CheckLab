@@ -1,1 +1,140 @@
-@tailwind base;@tailwind components;@tailwind utilities;
+/* apps/client/app/globals.css */
+@import "tailwindcss";
+
+/* NHLS Custom Properties */
+:root {
+  --nhls-primary: #16a34a;
+  --nhls-primary-dark: #15803d;
+  --nhls-secondary: #059669;
+  --nhls-accent: #10b981;
+  --nhls-gray: #6b7280;
+}
+
+/* Base styles without @apply */
+body {
+  background-color: #f9fafb;
+  color: #111827;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+}
+
+/* Component classes */
+.nhls-container {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.nhls-card {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+}
+
+.nhls-button-primary {
+  padding: 0.75rem 1.5rem;
+  background-color: #16a34a;
+  color: white;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.2s;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+.nhls-button-primary:hover:not(:disabled) {
+  background-color: #15803d;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+
+.nhls-button-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.nhls-button-secondary {
+  padding: 0.75rem 1.5rem;
+  background-color: white;
+  color: #16a34a;
+  border: 2px solid #16a34a;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.nhls-button-secondary:hover:not(:disabled) {
+  background-color: #f0fdf4;
+}
+
+.nhls-button-secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.nhls-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+}
+
+.nhls-input:focus {
+  outline: none;
+  ring: 2px solid #16a34a;
+  border-color: #16a34a;
+}
+
+.nhls-badge-draft {
+  padding: 0.25rem 0.75rem;
+  background-color: #fef3c7;
+  color: #92400e;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.nhls-badge-review {
+  padding: 0.25rem 0.75rem;
+  background-color: #dbeafe;
+  color: #1e40af;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.nhls-badge-final {
+  padding: 0.25rem 0.75rem;
+  background-color: #dcfce7;
+  color: #166534;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.nhls-section-header {
+  background: linear-gradient(to right, #16a34a, #15803d);
+  color: white;
+  padding: 1.5rem;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+/* Print Styles */
+@media print {
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}
