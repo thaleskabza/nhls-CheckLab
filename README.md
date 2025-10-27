@@ -15,3 +15,4 @@ Secure PostgreSQL storage with JSON-based inspection records for flexible data a
 PDF and dashboard reporting to support both operational audits and executive oversight.
 
 By digitizing waste inspection workflows, NHLS WasteCheck strengthens accountability, improves environmental compliance visibility, and reduces manual reporting effort across the national laboratory network.
++
