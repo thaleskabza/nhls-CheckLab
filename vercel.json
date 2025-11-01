@@ -1,0 +1,7 @@
+{
+  "buildCommand": "npm run --workspace=apps/client build",
+  "outputDirectory": "apps/client/.next",
+  "devCommand": "npm run --workspace=apps/client dev",
+  "installCommand": "npm ci --legacy-peer-deps",
+  "framework": null
+}
