@@ -14,7 +14,7 @@
     "jsx": "react-jsx",
     "incremental": true,
     "baseUrl": ".",
-    "ignoreDeprecations": "6.0", 
+    "ignoreDeprecations": ["6.0"], 
     "plugins": [{ "name": "next" }],
     "paths": {
       "@/*": ["./*"],
@@ -22,8 +22,7 @@
       "@core/*": ["apps/packages/core/*"],
       "@infra/*": ["apps/packages/infra/*"],
       "@api/*": ["apps/packages/api/*"],
-      "@config/*": ["apps/packages/config/*"],
-     
+      "@config/*": ["apps/packages/config/*"]
     }
   },
   "include": [
